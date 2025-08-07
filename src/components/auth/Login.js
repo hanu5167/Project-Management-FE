@@ -10,7 +10,7 @@ import {
 import { Formik, Form } from "formik";
 import * as Yup from "yup";
 import { useDispatch } from "react-redux";
-import { loginSuccess, loginFailure } from "../redux/reducer/LoginSlice";
+import { loginSuccess, loginFailure } from "../../redux/reducer/LoginSlice";
 
 const validationSchema = Yup.object({
   email: Yup.string().email("Invalid email").required("Email is required"),

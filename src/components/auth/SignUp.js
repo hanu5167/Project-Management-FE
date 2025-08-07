@@ -1,16 +1,14 @@
-import React from "react";
 import {
-  Container,
-  Box,
   Button,
-  Typography,
+  Container,
   Paper,
   TextField,
+  Typography
 } from "@mui/material";
-import { Formik, Form } from "formik";
-import * as Yup from "yup";
+import { Form, Formik } from "formik";
 import { useDispatch } from "react-redux";
-import { setUser } from "../redux/reducer/SignUpSlice";
+import * as Yup from "yup";
+import { setUser } from "../../redux/reducer/SignUpSlice";
 
 const validationSchema = Yup.object({
   fullName: Yup.string().required("Full Name is required"),
