@@ -1,12 +1,11 @@
 import React, { lazy, Suspense } from "react";
 import ReactDOM from "react-dom/client";
-import "./index.css";
-import App from "./App";
-import reportWebVitals from "./reportWebVitals";
-import { BrowserRouter } from "react-router-dom";
 import { Provider } from "react-redux";
-import Store from "./components/redux/Store";
-import { worker } from "./mocks/Browser";
+import { BrowserRouter } from "react-router-dom";
+import App from "./App";
+import Store from "./redux/Store";
+import "./index.css";
+import reportWebVitals from "./reportWebVitals";
 // worker.start();
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
