@@ -1,20 +1,23 @@
 import { Route, Routes } from "react-router-dom";
-
-import Login from "./components/auth/Login";
-import SignUp from "./components/auth/SignUp";
-import PageNotFound from "./components/common/PageNotFound";
-import HomePage from "./components/common/HomePage";
 import Layout from "./components/common/Layout";
+import { lazy, Suspense } from "react";
+
+const HomePage = lazy(() => import("./components/common/HomePage"));
+const Login = lazy(() => import("./components/auth/Login"));
+const SignUp = lazy(() => import("./components/auth/SignUp"));
+const PageNotFound = lazy(() => import("./components/common/PageNotFound"));
 
 const App = () => {
   return (
     <Layout>
-      <Routes>
-        <Route path="/" element={<Login />} />
-        <Route path="/home" element={<HomePage />} />
-        <Route path="/signup" element={<SignUp />} />
-        <Route path="*" element={<PageNotFound />} />
-      </Routes>
+      <Suspense fallback={<div>Page Loading ...</div>}>
+        <Routes>
+          <Route path="/" element={<Login />} />
+          <Route path="/home" element={<HomePage />} />
+          <Route path="/signup" element={<SignUp />} />
+          <Route path="*" element={<PageNotFound />} />
+        </Routes>
+      </Suspense>
     </Layout>
   );
 };
