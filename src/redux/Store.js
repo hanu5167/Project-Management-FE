@@ -1,11 +1,14 @@
 // src/redux/store.js
 import { configureStore } from "@reduxjs/toolkit";
-import signUpReducer from "../redux/reducer/SignUpSlice";
-import loginReducer from "../redux/reducer/LoginSlice";
+import projectsReducer from "../redux/reducer/ProjectsSlice";
+import tasksReducer from "../redux/reducer/TasksSlice";
+import authReducer from "../redux/reducer/AuthSlice"
 const Store = configureStore({
   reducer: {
-    signUp: signUpReducer,
-    login: loginReducer,
+ 
+    projects: projectsReducer,
+    tasks: tasksReducer,
+    auth:authReducer
   },
 });
 

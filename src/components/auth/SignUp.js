@@ -8,7 +8,7 @@ import {
 import { Form, Formik } from "formik";
 import { useDispatch } from "react-redux";
 import * as Yup from "yup";
-import { setUser } from "../../redux/reducer/SignUpSlice";
+// import { setUser } from "../../redux/reducer/SignUpSlice";
 
 const validationSchema = Yup.object({
   fullName: Yup.string().required("Full Name is required"),
@@ -24,7 +24,7 @@ export default function SignUp() {
 
   const handleSubmit = (values) => {
     // Store user data in Redux
-    dispatch(setUser(values));
+    // dispatch(setUser(values));
 
     console.log("User data stored in Redux:", values);
   };

@@ -1,24 +1,65 @@
+import {
+  Divider,
+  Drawer,
+  List,
+  ListItem,
+  ListItemText,
+  Toolbar,
+} from "@mui/material";
 
-const navbarList = [
-  { id: 1, navbName: "Home" },
-  { id: 2, navbName: "Dashboard" },
-  { id: 3, navbName: "Projects" },
-  { id: 4, navbName: "About" },
-  { id: 5, navbName: "Contact us" },
-];
+const drawerWidth = 240;
 
-const Navbar = () => {
-  return (
-    <nav className="d-flex justify-content-between align-items-center p-3">
-      <div>
-        <p className="mb-0 fw-bold">Logo</p>
-      </div>
-      <ul className="list-unstyled d-flex gap-4 mb-0">
-        {navbarList.map(({ id, navbName }) => (
-          <li key={id}>{navbName}</li>
+export const navList = ["Dashboard", "Projects", "Teams", "Reports"];
+
+const Navbar = (props) => {
+  const { mobileOpen, handleDrawerToggle, isMobile } = props;
+
+  const drawerContent = (
+    <div>
+      <Toolbar />
+      <Divider />
+      <List>
+        {navList.map((text) => (
+          <ListItem button key={text}>
+            <ListItemText primary={text} />
+          </ListItem>
         ))}
-      </ul>
-    </nav>
+      </List>
+    </div>
+  );
+
+  return isMobile ? (
+    <Drawer
+      variant="temporary"
+      open={mobileOpen}
+      onClose={handleDrawerToggle}
+      ModalProps={{
+        keepMounted: true,
+      }}
+      sx={{
+        "& .MuiDrawer-paper": {
+          width: drawerWidth,
+        },
+      }}
+    >
+      {drawerContent}
+    </Drawer>
+  ) : (
+    <span></span>
+    // <Drawer
+    //   variant="persistent"
+    //   open={mobileOpen}
+    //   sx={{
+    //     width: mobileOpen ? drawerWidth : 0,
+    //     flexShrink: 0,
+    //     "& .MuiDrawer-paper": {
+    //       width: drawerWidth,
+    //       boxSizing: "border-box",
+    //     },
+    //   }}
+    // >
+    //   {drawerContent}
+    // </Drawer>
   );
 };
 
