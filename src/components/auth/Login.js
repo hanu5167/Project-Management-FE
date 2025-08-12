@@ -3,7 +3,7 @@ import { Form, Formik } from "formik";
 import { useDispatch, useSelector } from "react-redux";
 import * as Yup from "yup";
 import { login } from "../../services/Auth";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 
 const validationSchema = Yup.object({
@@ -16,10 +16,11 @@ export default function Login() {
   const dispatch = useDispatch();
   const history = useNavigate();
 
-
-  if (loginStatus === true) {
-    history("/");
-  }
+  useEffect(() => {
+    if (loginStatus === true) {
+      history("/");
+    }
+  }, [loginStatus, history]);
 
   return (
     <Container maxWidth="sm">
@@ -71,6 +72,13 @@ export default function Login() {
               >
                 Login
               </Button>
+              <p className="text-center">
+                Are you a new member ? click{" "}
+                <span>
+                  <Link to="/register">here</Link>
+                </span>
+                &nbsp; to register
+              </p>
             </Form>
           )}
         </Formik>

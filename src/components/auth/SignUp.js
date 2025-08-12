@@ -1,33 +1,32 @@
-import {
-  Button,
-  Container,
-  Paper,
-  TextField,
-  Typography
-} from "@mui/material";
+import { Button, Container, Paper, TextField, Typography } from "@mui/material";
 import { Form, Formik } from "formik";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import * as Yup from "yup";
-// import { setUser } from "../../redux/reducer/SignUpSlice";
+import { register } from "../../services/Auth";
+import { useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
 
 const validationSchema = Yup.object({
-  fullName: Yup.string().required("Full Name is required"),
+  name: Yup.string().required("Name is required"),
   email: Yup.string().email("Invalid email").required("Email is required"),
   password: Yup.string().min(6, "Minimum 6 characters").required("Required"),
   confirmPassword: Yup.string()
     .oneOf([Yup.ref("password"), null], "Passwords must match")
     .required("Confirm your password"),
+  role: Yup.string().required("Roleis required"),
 });
 
 export default function SignUp() {
+  const { isUserRegistered } = useSelector((state) => state.auth);
+  const history = useNavigate();
   const dispatch = useDispatch();
+  console.log("registered: ", isUserRegistered);
 
-  const handleSubmit = (values) => {
-    // Store user data in Redux
-    // dispatch(setUser(values));
-
-    console.log("User data stored in Redux:", values);
-  };
+  useEffect(() => {
+    if (isUserRegistered === true) {
+      history("/login");
+    }
+  }, [isUserRegistered]);
 
   return (
     <Container maxWidth="sm">
@@ -38,26 +37,29 @@ export default function SignUp() {
 
         <Formik
           initialValues={{
-            fullName: "",
+            name: "",
             email: "",
             password: "",
             confirmPassword: "",
+            role: "",
           }}
           validationSchema={validationSchema}
-          onSubmit={handleSubmit}
+          onSubmit={(values) => {
+            dispatch(register(values));
+          }}
         >
           {({ values, handleChange, handleBlur, errors, touched }) => (
             <Form>
               <TextField
-                label="Full Name"
-                name="fullName"
+                label="Name"
+                name="name"
                 fullWidth
                 margin="normal"
-                value={values.fullName}
+                value={values.name}
                 onChange={handleChange}
                 onBlur={handleBlur}
-                error={touched.fullName && Boolean(errors.fullName)}
-                helperText={touched.fullName && errors.fullName}
+                error={touched.name && Boolean(errors.name)}
+                helperText={touched.name && errors.name}
               />
 
               <TextField
@@ -100,6 +102,18 @@ export default function SignUp() {
                 helperText={touched.confirmPassword && errors.confirmPassword}
               />
 
+              <TextField
+                label="Role"
+                name="role"
+                fullWidth
+                margin="normal"
+                value={values.role}
+                onChange={handleChange}
+                onBlur={handleBlur}
+                error={touched.role && Boolean(errors.role)}
+                helperText={touched.role && errors.role}
+              />
+
               <Button
                 type="submit"
                 variant="contained"
@@ -109,6 +123,13 @@ export default function SignUp() {
               >
                 Sign Up
               </Button>
+              <p className="text-center">
+                Already have an account ! click{" "}
+                <span>
+                  <Link to="/login">here</Link>
+                </span>
+                 &nbsp;to login
+              </p>
             </Form>
           )}
         </Formik>

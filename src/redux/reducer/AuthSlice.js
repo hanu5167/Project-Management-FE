@@ -5,7 +5,8 @@ const initialState = {
   user: null,
   isAuthenticated: false,
   error: null,
-  loginStatus:false
+  loginStatus: false,
+  isUserRegistered: false,
 };
 
 const loginSlice = createSlice({
@@ -16,20 +17,26 @@ const loginSlice = createSlice({
       state.user = action.payload;
       state.isAuthenticated = true;
       state.error = null;
-      state.loginStatus = true
+      state.loginStatus = true;
     },
     loginFailure: (state, action) => {
       state.error = action.payload;
       state.isAuthenticated = false;
       state.user = null;
+      state.loginStatus = false;
     },
     logout: (state) => {
       state.user = null;
       state.isAuthenticated = false;
       state.error = null;
+      state.loginStatus = false;
+    },
+    setIsUserRegistered: (state, action) => {
+      state.isUserRegistered = true
     },
   },
 });
 
-export const { loginSuccess, loginFailure, logout } = loginSlice.actions;
+export const { loginSuccess, loginFailure, logout, setIsUserRegistered } =
+  loginSlice.actions;
 export default loginSlice.reducer;
