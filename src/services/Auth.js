@@ -10,6 +10,7 @@ import { toast } from "react-toastify";
 const baseURL = "http://localhost:5000/api/auth/";
 
 export const login = (formData) => {
+  console.log(formData, "form");
   return async (dispatch) => {
     try {
       const response = await axios.post(`${baseURL}login`, formData);
@@ -34,8 +35,11 @@ export const login = (formData) => {
 
 export const register = (formData) => {
   return async (dispatch) => {
+    console.log("formData", formData);
     try {
       const response = await axios.post(`${baseURL}register`, formData);
+
+      console.log("response: ", response.data);
 
       if (response.status === 201) {
         console.log("User registered successfully");

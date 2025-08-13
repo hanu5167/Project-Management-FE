@@ -3,13 +3,37 @@ import {
   Drawer,
   List,
   ListItem,
+  ListItemButton,
   ListItemText,
   Toolbar,
 } from "@mui/material";
+import { Link } from "react-router-dom";
 
 const drawerWidth = 240;
 
-export const navList = ["Dashboard", "Projects", "Teams", "Reports"];
+// export const navList = ["Dashboard", "Projects", "Teams", "Reports"];
+export const navList = [
+  {
+    id: 1,
+    name: "Dashboard",
+    path: "/dashboard",
+  },
+  {
+    id: 2,
+    name: "Projects",
+    path: "/projects",
+  },
+  {
+    id: 3,
+    name: "Teams",
+    path: "/teams",
+  },
+  {
+    id: 4,
+    name: "Reports",
+    path: "/reports",
+  },
+];
 
 const Navbar = (props) => {
   const { mobileOpen, handleDrawerToggle, isMobile } = props;
@@ -19,10 +43,10 @@ const Navbar = (props) => {
       <Toolbar />
       <Divider />
       <List>
-        {navList.map((text) => (
-          <ListItem button key={text}>
-            <ListItemText primary={text} />
-          </ListItem>
+        {navList.map((list) => (
+          <Link to={list.path} key={list.id}>
+            <ListItemText primary={list.name} />
+          </Link>
         ))}
       </List>
     </div>

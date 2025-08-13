@@ -1,9 +1,20 @@
-import { Button, Container, Paper, TextField, Typography } from "@mui/material";
+import {
+  Button,
+  Container,
+  FormControl,
+  FormHelperText,
+  MenuItem,
+  OutlinedInput,
+  Paper,
+  Select,
+  TextField,
+  Typography,
+} from "@mui/material";
 import { Form, Formik } from "formik";
 import { useDispatch, useSelector } from "react-redux";
 import * as Yup from "yup";
 import { register } from "../../services/Auth";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
 const validationSchema = Yup.object({
@@ -18,6 +29,7 @@ const validationSchema = Yup.object({
 
 export default function SignUp() {
   const { isUserRegistered } = useSelector((state) => state.auth);
+
   const history = useNavigate();
   const dispatch = useDispatch();
   console.log("registered: ", isUserRegistered);
@@ -102,17 +114,29 @@ export default function SignUp() {
                 helperText={touched.confirmPassword && errors.confirmPassword}
               />
 
-              <TextField
-                label="Role"
-                name="role"
+              <FormControl
                 fullWidth
                 margin="normal"
-                value={values.role}
-                onChange={handleChange}
-                onBlur={handleBlur}
                 error={touched.role && Boolean(errors.role)}
-                helperText={touched.role && errors.role}
-              />
+              >
+                <Select
+                  labelId="role-label"
+                  name="role"
+                  value={values?.role}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  displayEmpty
+                >
+                  <MenuItem value="" disabled>
+                    Select Role
+                  </MenuItem>
+                  <MenuItem value="Admin">Admin</MenuItem>
+                  <MenuItem value="Member">Member</MenuItem>
+                </Select>
+                {touched.role && errors.role && (
+                  <FormHelperText>{errors.role}</FormHelperText>
+                )}
+              </FormControl>
 
               <Button
                 type="submit"
@@ -128,7 +152,7 @@ export default function SignUp() {
                 <span>
                   <Link to="/login">here</Link>
                 </span>
-                 &nbsp;to login
+                &nbsp;to login
               </p>
             </Form>
           )}

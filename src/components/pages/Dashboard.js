@@ -18,8 +18,6 @@ const Dashboard = () => {
   console.log("tasksList: ", tasksList);
 
   useEffect(() => {
-    
-
     const mockTasks = [
       { id: 1, title: "Design Homepage", dueDate: "2025-08-20" },
       { id: 2, title: "Setup Backend API", dueDate: "2025-08-15" },
@@ -51,7 +49,6 @@ const Dashboard = () => {
         📊 Dashboard Overview
       </Typography>
 
-     
       <Grid container spacing={2}>
         <Grid item xs={12} md={4}>
           <Paper sx={{ p: 2, textAlign: "center" }}>
@@ -73,7 +70,6 @@ const Dashboard = () => {
         </Grid>
       </Grid>
 
-      
       <Box sx={{ mt: 4 }}>
         <Typography variant="h5">⏳ Upcoming Deadlines</Typography>
         {stats.upcomingTasks.length > 0 ? (

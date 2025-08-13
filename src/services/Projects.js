@@ -1,5 +1,8 @@
 import axios from "axios";
-import { setProjectsList } from "../redux/reducer/ProjectsSlice";
+import {
+  setProjectDetails,
+  setProjectsList,
+} from "../redux/reducer/ProjectsSlice";
 
 export const getAllProjects = async (dispatch) => {
   try {
@@ -17,4 +20,28 @@ export const getAllProjects = async (dispatch) => {
     console.error("Error fetching projects:", error);
     throw error;
   }
+};
+
+export const getProjectById = (id) => {
+  return async (dispatch) => {
+    try {
+      // const token = localStorage.getItem("jwtToken"); // adjust key if needed
+      // console.log(token, "token");
+      const response = await axios.get(
+        `http://localhost:5000/api/projects/${id}`
+        // {
+        //   headers: {
+        //     Authorization: `Bearer ${token}`,
+        //   },
+        // }
+      );
+
+      if (response?.data) {
+        dispatch(setProjectDetails(response.data));
+        console.log("Fetched Project Details:", response.data);
+      }
+    } catch (error) {
+      console.error("Error in getProjectById:", error);
+    }
+  };
 };

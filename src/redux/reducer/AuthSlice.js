@@ -1,4 +1,3 @@
-// src/redux/loginSlice.js
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
@@ -32,7 +31,7 @@ const loginSlice = createSlice({
       state.loginStatus = false;
     },
     setIsUserRegistered: (state, action) => {
-      state.isUserRegistered = true
+      state.isUserRegistered = true;
     },
   },
 });

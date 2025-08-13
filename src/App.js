@@ -9,6 +9,12 @@ const Login = lazy(() => import("./components/auth/Login"));
 const SignUp = lazy(() => import("./components/auth/SignUp"));
 const PageNotFound = lazy(() => import("./components/common/PageNotFound"));
 const Dashboard = lazy(() => import("./components/pages/Dashboard"));
+const Project = lazy(() =>
+  import("./components/pages/project-management/Project")
+);
+const ViewProjectDetails = lazy(() =>
+  import("./components/pages/project-management/ViewProjectDetails")
+);
 
 const App = () => {
   return (
@@ -21,6 +27,11 @@ const App = () => {
           <Route path="/register" element={<SignUp />} />
           <Route path="*" element={<PageNotFound />} />
           <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/projects" element={<Project />} />
+          <Route
+            path="/view-projects-details"
+            element={<ViewProjectDetails />}
+          />
         </Routes>
       </Suspense>
     </Layout>

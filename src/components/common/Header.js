@@ -1,18 +1,22 @@
 import MenuIcon from "@mui/icons-material/Menu";
 import {
   AppBar,
+  Box,
+  Button,
   IconButton,
+  ListItemText,
   Toolbar,
   Typography,
   useMediaQuery,
-  Box,
-  Button,
 } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
+import { Link, useNavigate } from "react-router-dom";
 import { navList } from "./Navbar";
 
 const Header = ({ onDrawerToggle }) => {
+  console.log("navList: ", navList);
   const theme = useTheme();
+  const history = useNavigate();
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
 
   return (
@@ -42,9 +46,13 @@ const Header = ({ onDrawerToggle }) => {
 
         {!isMobile && (
           <Box sx={{ display: "flex", gap: 2 }}>
-            {navList.map((text) => (
-              <Button key={text} color="inherit">
-                {text}
+            {navList?.map((list) => (
+              <Button
+                onClick={() => history(list.path)}
+                key={list.id}
+                color="inherit"
+              >
+                <ListItemText primary={list.name} />
               </Button>
             ))}
           </Box>
