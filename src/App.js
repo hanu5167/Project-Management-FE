@@ -28,10 +28,7 @@ const App = () => {
           <Route path="*" element={<PageNotFound />} />
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/projects" element={<Project />} />
-          <Route
-            path="/view-projects-details"
-            element={<ViewProjectDetails />}
-          />
+          <Route path="/viewProject/:id" element={<ViewProjectDetails />} />
         </Routes>
       </Suspense>
     </Layout>

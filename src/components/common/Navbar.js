@@ -2,16 +2,13 @@ import {
   Divider,
   Drawer,
   List,
-  ListItem,
-  ListItemButton,
   ListItemText,
-  Toolbar,
+  Toolbar
 } from "@mui/material";
 import { Link } from "react-router-dom";
 
 const drawerWidth = 240;
 
-// export const navList = ["Dashboard", "Projects", "Teams", "Reports"];
 export const navList = [
   {
     id: 1,

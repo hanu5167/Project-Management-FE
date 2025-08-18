@@ -1,13 +1,12 @@
-import Button from "@mui/material/Button";
 import Card from "@mui/material/Card";
 import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getAllProjects, getProjectById } from "../../../services/Projects";
 import { Link } from "react-router-dom";
+import { getAllProjects } from "../../../services/Projects";
 
 export default function ProjectList() {
   const projectDetails = useSelector((state) => state.projects);
@@ -17,15 +16,10 @@ export default function ProjectList() {
     dispatch(getAllProjects);
   }, [dispatch]);
 
-  const handleViewDetails = (id) => {
-    console.log("Selected Project ID:", id);
-    dispatch(getProjectById(id));
-  };
-
   return (
     <Grid container spacing={2}>
       {projectDetails?.projectsList?.map((project) => (
-        <Grid item key={project.id} xs={12} sm={6} md={4}>
+        <Grid item key={project._id} xs={12} sm={6} md={4}>
           <Card sx={{ maxWidth: 345 }}>
             <CardContent>
               <Typography gutterBottom variant="h5" component="div">
@@ -39,12 +33,7 @@ export default function ProjectList() {
               </Typography>
             </CardContent>
             <CardActions>
-              <Button
-                size="small"
-                onClick={() => handleViewDetails(project._id)}
-              >
-                <Link to="/view-projects-details">View More Details</Link>
-              </Button>
+              <Link to={`/viewProject/${project._id}`}>View More Details</Link>
             </CardActions>
           </Card>
         </Grid>

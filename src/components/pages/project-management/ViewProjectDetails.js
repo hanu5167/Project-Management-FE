@@ -1,16 +1,26 @@
-import React from "react";
-import { useSelector } from "react-redux";
 import { Formik } from "formik";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
+import { getProjectById } from "../../../services/Projects";
 
 function ViewProjectDetails() {
   const projDetail = useSelector((state) => state.projects);
   const project = projDetail.projectDetails;
+  const { id } = useParams();
+  const dispatch = useDispatch();
 
   const initialValues = {
     name: project?.name || "",
     description: project?.description || "",
     members: project?.members || [],
   };
+
+  useEffect(() => {
+    if (id) {
+      dispatch(getProjectById(id));
+    }
+  }, [dispatch, id]);
 
   return (
     <Formik initialValues={initialValues} enableReinitialize>

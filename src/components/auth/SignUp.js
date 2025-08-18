@@ -4,18 +4,17 @@ import {
   FormControl,
   FormHelperText,
   MenuItem,
-  OutlinedInput,
   Paper,
   Select,
   TextField,
-  Typography,
+  Typography
 } from "@mui/material";
 import { Form, Formik } from "formik";
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
 import * as Yup from "yup";
 import { register } from "../../services/Auth";
-import { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
 
 const validationSchema = Yup.object({
   name: Yup.string().required("Name is required"),

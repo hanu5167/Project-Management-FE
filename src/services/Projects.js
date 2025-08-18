@@ -3,11 +3,14 @@ import {
   setProjectDetails,
   setProjectsList,
 } from "../redux/reducer/ProjectsSlice";
+import UseHeader from "../hooks/UseHeader";
 
 export const getAllProjects = async (dispatch) => {
   try {
     axios
-      .get("http://localhost:5000/api/projects")
+      .get("http://localhost:5000/api/projects", {
+        headers: UseHeader(),
+      })
       .then((response) => {
         if (response) {
           dispatch(setProjectsList(response.data));
@@ -25,20 +28,15 @@ export const getAllProjects = async (dispatch) => {
 export const getProjectById = (id) => {
   return async (dispatch) => {
     try {
-      // const token = localStorage.getItem("jwtToken"); // adjust key if needed
-      // console.log(token, "token");
       const response = await axios.get(
-        `http://localhost:5000/api/projects/${id}`
-        // {
-        //   headers: {
-        //     Authorization: `Bearer ${token}`,
-        //   },
-        // }
+        `http://localhost:5000/api/projects/${id}`,
+        {
+          headers: UseHeader(),
+        }
       );
 
       if (response?.data) {
         dispatch(setProjectDetails(response.data));
-        console.log("Fetched Project Details:", response.data);
       }
     } catch (error) {
       console.error("Error in getProjectById:", error);

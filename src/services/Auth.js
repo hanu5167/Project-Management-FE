@@ -18,6 +18,9 @@ export const login = (formData) => {
       if (response.status === 200 || response.status === 204) {
         dispatch(loginSuccess(response.data));
         toast.success("Successfully Logged in");
+        console.log(response.data);
+        localStorage.setItem("jwtToken", response?.data?.token);
+        localStorage.setItem("username", response?.data?.user?.name);
       }
     } catch (error) {
       if (error?.response?.status === 401 || error?.response?.status === 404) {
