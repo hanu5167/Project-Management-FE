@@ -18,7 +18,7 @@ export default function Login() {
 
   useEffect(() => {
     if (loginStatus === true) {
-      history("/");
+      history("/home");
     }
   }, [loginStatus, history]);
 
