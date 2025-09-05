@@ -5,6 +5,7 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Unauthorized from "./components/common/Unauthorized";
 import ProtectedRoute from "./components/common/ProtectedRoute";
+import Otp from "./components/auth/Otp";
 const HomePage = lazy(() => import("./components/common/HomePage"));
 const Login = lazy(() => import("./components/auth/Login"));
 const SignUp = lazy(() => import("./components/auth/SignUp"));
@@ -25,6 +26,7 @@ const App = () => {
         <Routes>
           {/* Public */}
           <Route path="/" element={<Login />} />
+          <Route path="/otp" element={<Otp />} />
           <Route path="/unauthorized" element={<Unauthorized />} />
           <Route path="/register" element={<SignUp />} />
           <Route path="/home" element={<HomePage />} />

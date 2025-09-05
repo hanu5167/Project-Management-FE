@@ -15,7 +15,7 @@ export const login = (formData) => {
     try {
       const response = await axios.post(`${baseURL}login`, formData);
 
-      if (response.status === 200 || response.status === 204) {
+      if (response.status === 201 || response.status === 200) {
         dispatch(loginSuccess(response.data));
         toast.success("Successfully Logged in");
         console.log(response.data);
@@ -60,6 +60,25 @@ export const register = (formData) => {
       } else {
         toast.error(`Error in Register  ${error?.message}`);
       }
+    }
+  };
+};
+
+export const validateOtp = () => {
+  return async (dispatch) => {
+    try {
+      const response = await axios.post(`${baseURL}`); //provide correct url
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
+export const ResendOtp = () => {
+  return async (dispatch) => {
+    try {
+      const response = await axios.post(`${baseURL}`); //provide correct url
+    } catch (error) {
+      console.log(error);
     }
   };
 };
